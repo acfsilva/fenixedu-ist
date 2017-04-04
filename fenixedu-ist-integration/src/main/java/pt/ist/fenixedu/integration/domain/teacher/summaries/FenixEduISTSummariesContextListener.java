@@ -23,20 +23,17 @@ public class FenixEduISTSummariesContextListener implements ServletContextListen
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         Signal.register(Summary.CREATE_SIGNAL, (DomainObjectEvent<Summary> event) -> {
-            //handle(event.getInstance());
-            Calendar maxEndDate = event.getInstance().getExecutionCourse().getExecutionDegrees().stream()
+            Calendar gradeSubmissionEndDate = event.getInstance().getExecutionCourse().getExecutionDegrees().stream()
                     .flatMap(ed -> ed.getPeriods(OccupationPeriodType.GRADE_SUBMISSION)).map(o -> o.getEndDate())
                     .max(Calendar::compareTo).get();
             
-            if (maxEndDate.before(Calendar.getInstance())) {
-                throw new DomainException("error.summary.no.valid.date");
+            if (gradeSubmissionEndDate.before(Calendar.getInstance())) {
+                throw new DomainException("error.summary.current.date.after.end.period");
             }
-            
-
         });
 
         Signal.register(Summary.EDIT_SIGNAL, (DomainObjectEvent<Summary> event) -> {
-
+            System.out.println("Do something here");
         });
     }
 
@@ -62,6 +59,7 @@ public class FenixEduISTSummariesContextListener implements ServletContextListen
             throw new DomainException("message.error.page.description");
         }
         
+
 
     }
 
