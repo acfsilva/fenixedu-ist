@@ -14,8 +14,8 @@ import org.fenixedu.academic.domain.OccupationPeriod;
 import org.fenixedu.academic.domain.OccupationPeriodType;
 import org.fenixedu.academic.domain.Summary;
 import org.fenixedu.academic.domain.exceptions.DomainException;
-import org.fenixedu.bennu.signals.DomainObjectEvent;
-import org.fenixedu.bennu.signals.Signal;
+import org.fenixedu.bennu.core.signals.DomainObjectEvent;
+import org.fenixedu.bennu.core.signals.Signal;
 
 @WebListener
 public class FenixEduISTSummariesContextListener implements ServletContextListener {
